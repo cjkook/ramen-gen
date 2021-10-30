@@ -1,25 +1,24 @@
 let sections = 6;
-let bowlSize = 300;
-
 let bowl;
 
 function setup() {
 	createCanvas(windowWidth, windowHeight-10);
 	rectMode(CENTER);
-	console.log(baseClrs)
 
-	// call bowl setup in a function
-	//
-	bowl = new RamenBowl(random(0.4, 0.9));
+	
 
 }
 
 function draw() {
-	console.log(bowl.pixelSize);
-	
+	console.log(makeOrder());
+	let order = makeOrder();
 	// call background in a function with canvas blended
 	background(bgClrs[Math.floor(random()*bgClrs.length)]);
 
+
+	// call bowl setup in a function
+	// (size, broth, oil, protein, veg, extras)
+	bowl = new RamenBowl(order);
 	bowl.display();
 
 	// move to center

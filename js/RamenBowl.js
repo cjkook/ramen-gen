@@ -1,8 +1,22 @@
 // creates bowl, chopsticks, and spoon
 class RamenBowl {
-	constructor(size) {
-		this.size = size;
-		this.pixelSize = size * (windowWidth/2);
+	// constructor(size, broth, oil, protein, veg, extras) {
+    // for (var prop in obj) {
+    //   if (obj.hasOwnProperty(prop)) {
+    //     this[prop] = obj[prop];
+    //   }
+    // }
+  constructor(order) {
+    console.log(order)
+    for (let prop in order) {
+      if (order.hasOwnProperty(prop)) {
+        this[prop] = order[prop]
+      }
+    }
+    
+		this.pixelSize = order.size * (windowWidth*.65);
+    //! add protein, veg, and extras together
+    console.log(this)
 	}
 
 	// display
