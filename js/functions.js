@@ -1,3 +1,4 @@
+// make an order
 function makeOrder() {
   let order = {};
   // size
@@ -36,6 +37,16 @@ function makeOrder() {
   return order;
   // make menu description with palette
 }
+
+// make mushrooms
+
+function fnMushrooms(x, y, size, sections) {
+	let density = size;
+
+  ellipse(x,y,size/sections)
+}
+
+
 
 // menu desc & palette
 function makeMenuPalette() {}
