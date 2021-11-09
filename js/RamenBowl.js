@@ -7,7 +7,6 @@ class RamenBowl {
   //   }
   // }
   constructor(order) {
-    console.log(order);
     for (let prop in order) {
       if (order.hasOwnProperty(prop)) {
         this[prop] = order[prop];
@@ -15,9 +14,10 @@ class RamenBowl {
     }
 
     this.pixelSize = order.size * (windowWidth * 0.65);
-    this.sections = 8;
-    //! add protein, veg, and extras together for sections
-    console.log(this);
+    // add veggies to sections
+    this.sections = this.veg;
+    this.placement = (this.pixelSize*this.size)*0.23;
+    console.log(this)
   }
 
   // display
@@ -39,20 +39,18 @@ class RamenBowl {
     // oil
 
     // SECTIONS
-    for (var i = 0; i < this.sections; i++) {
+    for (var i = 0; i < this.sections.length; i++) {
       push();
-      fill(255 - i * 45);
-      rotate((TWO_PI * i) / this.sections); // each slice
-
-      // add proteins // use continue
-
-      // add veggies // use continue
-
-      // add extras // use continue
+      rotate((TWO_PI * i) / this.sections.length); // each slice
 
       // x value determines distance from center
-      fnMushrooms(random(140), 0, 40, 8);
-      rect(random(140), 0, 20, 20);
+      switch(this.sections[i]) {
+        case "mushrooms":
+          fnMushrooms(this.placement, 0, this.size, this.sections.length);
+      }
+      
+      
+      // rect(random(140), 0, 20, 20);
       pop();
     }
   }

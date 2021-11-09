@@ -10,7 +10,6 @@ function setup() {
 }
 
 function draw() {
-	console.log(makeOrder());
 	let order = makeOrder();
 	// call background in a function with canvas blended
 	background(bgClrs[Math.floor(random()*bgClrs.length)]);
