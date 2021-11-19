@@ -44,7 +44,7 @@ function fnBroth() {}
 
 // make oil
 function fnOil(size, color) {
-  for (let i = 0; i <= Math.ceil(size)%48; i++) {
+  for (let i = 0; i <= (Math.ceil(size)%36)+5; i++) {
     let c = Math.ceil(random(10,99));
     fill(color+c);
     // let x = random(-size/4,size/4);
@@ -113,6 +113,23 @@ function fnMushrooms(locX, locY, size, sections) {
     endShape(CLOSE);
     pop();
   }
+}
+
+// make egg
+function fnEgg(ax, ay, s = 100, opt = 2) {
+	let points = [];
+  fill(ramenClrs[1])
+	beginShape();
+	for (let i = 0; i < 360 / opt; i += opt) {
+		var x = ax + cos(radians((i * opt) + 90)) * (s * map(abs((i * opt) - 180), 0, 180, 1, 1.5));
+		var y = ay + sin(radians((i * opt) + 90)) * s * 1.5;
+    x += ax*.9;
+		vertex(x, y);
+		points.push(createVector(x, y));
+	}
+	endShape(CLOSE);
+  fill(ramenClrs[0])
+  ellipse(ax+(ax*.9),ay+10,60)
 }
 
 // menu desc & palette

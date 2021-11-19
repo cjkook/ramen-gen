@@ -49,7 +49,11 @@ class RamenBowl {
       switch(this.sections[i]) {
         case "mushrooms":
           fnMushrooms(this.placement, 0, this.size, this.sections.length);
-      }
+          break;
+        case "egg":
+          fnEgg(this.placement,0,45,2)
+          break;
+        }
       
       
       // rect(random(140), 0, 20, 20);
