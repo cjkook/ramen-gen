@@ -53,6 +53,9 @@ class RamenBowl {
         case "egg":
           fnEgg(this.placement,0,45,2)
           break;
+        case "onions":
+          fnScallions(this.placement,0,20);
+          break;
         }
       
       

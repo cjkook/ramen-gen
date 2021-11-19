@@ -1,6 +1,7 @@
 let sections = 6;
 let bowl;
-let bg
+let bg;
+let textureGraphics;
 
 function setup() {
 	createCanvas(windowWidth, windowHeight-10);

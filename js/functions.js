@@ -27,7 +27,7 @@ function makeOrder() {
   veggies = prepend("onions", veggies);
   let numVeg = Math.floor(random(2, veggies.length));
   veggies = veggies.slice(0, numVeg);
-  console.log(numVeg, veggies);
+  shuffleArray(veggies);
   order.veg = veggies;
 
   // extras
@@ -113,6 +113,26 @@ function fnMushrooms(locX, locY, size, sections) {
     endShape(CLOSE);
     pop();
   }
+}
+
+// make scallions
+function fnScallions(x, y, size) {
+  fill(ramenClrs[3])
+	for (let i = 0; i <= 200; i++) {
+		let locx = random(-40,40);
+		let locy = random(-40,40);
+		
+		
+		push();
+    translate(x+x,y)
+    i%2===0 ? rotate(random(i)) : rotate(random(-i));
+    // rotate(random(i));
+		shearX(10);
+		rect(0+locx, y+locy, 15, 17 / 3);
+    fill(ramenClrs[2]);
+    rect(0+locx+4, y+locy+random(4), 20, 17 / 3);
+		pop();
+	}
 }
 
 // make egg
