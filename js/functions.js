@@ -72,7 +72,7 @@ function fnMushrooms(locX, locY, size, sections) {
     for (let a = 0; a < TWO_PI; a += 0.2) {
       let xoff = map(cos(a), -2, 1, 0, 2);
       let yoff = map(sin(a), -1, 1, 0, 2);
-      const r = map(noise(xoff, yoff, zoff), 0, 1, 40, size * 140);
+      const r = map(noise(xoff, yoff, zoff), 0, 1, 40, size * 110);
       let x = r * cos(a);
       let y = r * sin(a);
       vertex(x + locX, y);
@@ -88,7 +88,7 @@ function fnMushrooms(locX, locY, size, sections) {
     for (let a = 0; a < TWO_PI; a += 0.1) {
       let xoff = map(cos(a), -2, 1, 0, 2);
       let yoff = map(sin(a), -1, 1, 0, 2);
-      const r = map(noise(xoff, yoff, zoff), 0, 1, 40, size * 140);
+      const r = map(noise(xoff, yoff, zoff), 0, 1, 40, size * 110);
       let x = r * cos(a);
       let y = r * sin(a);
       line(locX, locY, x + locX, y + locY);
@@ -134,6 +134,19 @@ function fnEgg(ax, ay, s = 100, opt = 2) {
 
 // menu desc & palette
 function makeMenuPalette() {}
+
+// background noise function
+function drawNoiseBackground(_n, _graphics) {
+  for (let i = 0; i < _n; i++) {
+    let x = sqrt(random(1)) * width;
+    let y = sqrt(random(1)) * height;
+    let w = random(1, 4);
+    let h = random(1, 4);
+    _graphics.noStroke();
+    _graphics.fill(random(255), random(40));
+    _graphics.ellipse(x, y, w, h);
+  }
+}
 
 // shuffle
 /* Randomize array in-place using Durstenfeld shuffle algorithm */
