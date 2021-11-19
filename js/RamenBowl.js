@@ -13,7 +13,7 @@ class RamenBowl {
       }
     }
 
-    this.pixelSize = order.size * (windowWidth * 0.65);
+    this.pixelSize = order.size * (windowHeight * 0.65);
     // add veggies to sections
     this.sections = this.veg;
     this.placement = (this.pixelSize*this.size)*0.23;
@@ -22,6 +22,7 @@ class RamenBowl {
 
   // display
   display() {
+    console.log(this.pixelSize)
     noStroke();
 
     // edge
@@ -37,6 +38,7 @@ class RamenBowl {
     ellipse(0, 0, this.pixelSize * 0.75);
 
     // oil
+    fnOil(this.pixelSize,brothClrs[1]);
 
     // SECTIONS
     for (var i = 0; i < this.sections.length; i++) {

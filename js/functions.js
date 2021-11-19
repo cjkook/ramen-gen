@@ -15,6 +15,7 @@ function makeOrder() {
   // broth
   order.broth = "chicken";
 
+  // oil
   order.oil = "black garlic";
 
   // protein
@@ -36,6 +37,22 @@ function makeOrder() {
   order.sections = prepend(order.extras, order.sections);
   return order;
   // make menu description with palette
+}
+
+// make broth // textures
+function fnBroth() {}
+
+// make oil
+function fnOil(size, color) {
+  for (let i = 0; i <= Math.ceil(size)%48; i++) {
+    let c = Math.ceil(random(10,99));
+    fill(color+c);
+    // let x = random(-size/4,size/4);
+    // let y = random(-size/4,size/4);
+    let x = randomGaussian()*(size/9)
+    let y = randomGaussian()*(size/9)
+    ellipse(x, y, random(10,50));
+  }
 }
 
 // make mushrooms
@@ -63,7 +80,7 @@ function fnMushrooms(locX, locY, size, sections) {
     endShape(CLOSE);
     pop();
     // lines
-    
+
     strokeWeight(1);
     push();
     beginShape();
