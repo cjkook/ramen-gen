@@ -16,13 +16,13 @@ class RamenBowl {
     this.pixelSize = order.size * (windowHeight * 0.65);
     // add veggies to sections
     this.sections = this.veg;
-    this.placement = (this.pixelSize*this.size)*0.23;
-    console.log(this)
+    this.placement = this.pixelSize * this.size * 0.23;
+    console.log(this);
   }
 
   // display
   display() {
-    console.log(this.pixelSize)
+    console.log(this.pixelSize);
     noStroke();
 
     // edge
@@ -34,11 +34,7 @@ class RamenBowl {
     ellipse(0, 0, this.pixelSize);
 
     // broth
-    fill(brothClrs[0]);
-    ellipse(0, 0, this.pixelSize * 0.75);
-
-    // oil
-    fnOil(this.pixelSize,brothClrs[1]);
+    fnBroth(this.broth, this.oil, this.pixelSize);
 
     // SECTIONS
     for (var i = 0; i < this.sections.length; i++) {
@@ -46,19 +42,21 @@ class RamenBowl {
       rotate((TWO_PI * i) / this.sections.length); // each slice
 
       // x value determines distance from center
-      switch(this.sections[i]) {
+      switch (this.sections[i]) {
         case "mushrooms":
           fnMushrooms(this.placement, 0, this.size, this.sections.length);
           break;
         case "egg":
-          fnEgg(this.placement,0,45,2)
+          fnEgg(this.placement, 0, 45, 2);
           break;
         case "onions":
-          fnScallions(this.placement,0,20);
+          fnScallions(this.placement, 0, 20);
           break;
-        }
-      
-      
+        case "fishcake":
+          fnFishcake(this.placement,0,this.pixelSize);
+          break;
+      }
+
       // rect(random(140), 0, 20, 20);
       pop();
     }
