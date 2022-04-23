@@ -15,7 +15,7 @@ function draw() {
   background(bgClrs[0]);
   bg = createGraphics(width, height);
   bg.colorMode(HSB, 360, 100, 100, 100);
-  // drawNoiseBackground(10000, bg);
+  drawNoiseBackground(10000, bg);
   image(bg, 0, 0);
 
   // call bowl setup in a function

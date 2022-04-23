@@ -70,15 +70,18 @@ function fnBroth(type, oil, size) {
   //   ellipse(random(-brothSize, brothSize), random(-brothSize, brothSize), w, h);
   // }
 
-  
   // oil
   fnOil(oil, size);
 }
 
 // make oil
 function fnOil(type, size) {
-  let circArray = [];
+  let oilArray = [];
   let color;
+  let attempts = 100;
+  let minRadius = 2;
+  let maxRadius = 25;
+  let stepRadius = 1;
 
   // select color
   switch (type) {
@@ -87,13 +90,35 @@ function fnOil(type, size) {
       break;
   }
 
-  for (let i = 0; i <= (Math.ceil(size) % 36) + 5; i++) {
-    let c = Math.ceil(random(10, 99));
-    fill(color + c);
-    let x = randomGaussian() * (size / 9);
-    let y = randomGaussian() * (size / 9);
-    ellipse(x, y, random(10, 50));
+  // create oils
+  for (let i = 0; i < attempts; i++) {
+    const x = random(-size / 5, size / 5);
+    const y = random(-size / 5, size / 5);
+    for (let r = minRadius; r <= maxRadius; r += stepRadius) {
+      const checkCol = (x, y, r) => {
+        return oilArray.find((o) => dist(o.x, o.y, x, y) <= o.r + r);
+      };
+      let col = checkCol(x, y, r);
+      if (col && r == minRadius) break;
+      if (col) {
+        r -= stepRadius;
+        oilArray.push({ x, y, r });
+        break;
+      }
+      if (!col && r == maxRadius) {
+        oilArray.push({ x, y, r });
+        break;
+      }
+    }
   }
+  oilArray.forEach((o) => {
+    let centerDist = dist(o.x, o.y, 0, 0);
+    if (centerDist < size / 5) {
+      let c = Math.ceil(random(10, 99));
+      fill(color + c);
+      ellipse(o.x, o.y, o.r * 2);
+    }
+  });
 }
 
 // make mushrooms
