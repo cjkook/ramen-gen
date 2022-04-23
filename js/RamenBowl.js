@@ -16,14 +16,14 @@ class RamenBowl {
 
   // display
   display() {
-    console.log(this.pixelSize);
-    noStroke();
-
     // edge
+    stroke(40)
+    strokeWeight(4)
     fill(baseClrs[1]);
     ellipse(0, 0, this.pixelSize * 1.05);
 
     // bowl
+    noStroke();
     fill(baseClrs[0]);
     ellipse(0, 0, this.pixelSize);
 
@@ -48,6 +48,9 @@ class RamenBowl {
           break;
         case "fishcake":
           fnFishcake(this.placement,0,this.pixelSize);
+          break;
+        case "chili":
+          fnChiliThread(this.placement,0,this.pixelSize);
           break;
       }
 

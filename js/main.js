@@ -2,6 +2,7 @@ let sections = 6;
 let bowl;
 let bg;
 let textureGraphics;
+let paperGfx;
 
 function setup() {
   createCanvas(windowWidth, windowHeight + 10);
@@ -17,6 +18,12 @@ function draw() {
   bg.colorMode(HSB, 360, 100, 100, 100);
   drawNoiseBackground(10000, bg);
   image(bg, 0, 0);
+
+  // make paper
+  paperGfx = createGraphics(width, height);
+  fnPaper(paperGfx);
+  image(paperGfx,0,0);
+  
 
   // call bowl setup in a function
   // (size, broth, oil, protein, veg, extras)

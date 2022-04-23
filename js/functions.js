@@ -29,6 +29,7 @@ function makeOrder() {
     "bok choy",
     "egg",
     "fishcake",
+    "chili"
   ];
   shuffleArray(veggies);
   veggies = prepend("onions", veggies);
@@ -42,7 +43,11 @@ function makeOrder() {
 
   order.sections = prepend(order.protein, order.veg);
   order.sections = prepend(order.extras, order.sections);
-  console.log(order.sections);
+
+  // ? for testing
+  
+
+  // return order
   return order;
   // make menu description with palette
 }
@@ -50,7 +55,7 @@ function makeOrder() {
 // make broth
 function fnBroth(type, oil, size) {
   let color;
-  let brothSize = size / 3;
+  const brothSize = size / 3;
 
   // select color
   switch (type) {
@@ -62,13 +67,17 @@ function fnBroth(type, oil, size) {
   ellipse(0, 0, size * 0.75);
 
   // texture
-  // for (let i = 0; i < random(4000, 8000); i++) {
-  //   let w = random(2, 4);
-  //   let h = random(2, 4);
-  //   noStroke();
-  //   fill(random(255), random(20));
-  //   ellipse(random(-brothSize, brothSize), random(-brothSize, brothSize), w, h);
-  // }
+  for (let i = 0; i < random(1000, 2000); i++) {
+    const w = random(2, 4);
+    const h = random(2, 4);
+    const x = random(-brothSize, brothSize)
+    const y = random(-brothSize, brothSize)
+    if(dist(x,y,0,0)<brothSize){
+      fill(random(255),random(50),random(20), random(40));
+    ellipse(x, y, w, h);
+    }
+    
+  }
 
   // oil
   fnOil(oil, size);
@@ -78,7 +87,7 @@ function fnBroth(type, oil, size) {
 function fnOil(type, size) {
   let oilArray = [];
   let color;
-  let attempts = 100;
+  let attempts = 1000;
   let minRadius = 2;
   let maxRadius = 25;
   let stepRadius = 1;
@@ -229,10 +238,10 @@ function fnFishcake(x, y, size) {
     let place = random(100, x * 2);
 
     // base
-    fill(ramenClrs[6] + "E0");
-    ellipse(place, y + n * 30, size / 10);
+    fill(ramenClrs[6] + "EE");
+    ellipse(place, y + n * 30, size / 8);
 
-    for (let i = 0; i <= 100 + random(40); i++) {
+    for (let i = 0; i <= 100 + random(40,120); i++) {
       let locx = place + cos(angle) * scalar;
       let locy = y + sin(angle) * scalar;
       angle += speed;
@@ -240,11 +249,16 @@ function fnFishcake(x, y, size) {
 
       noStroke();
       fill(ramenClrs[7]);
-      ellipse(locx, locy + n * 30, 1, 1);
+      ellipse(locx, locy + n * 30, 2, 1);
       angle += speed / 10;
       scalar += speed;
     }
   }
+}
+
+// chili thread
+function fnChiliThread(x,y,size) {
+
 }
 
 // menu desc & palette
@@ -253,6 +267,37 @@ function makeMenuPalette() {
   strokeWeight(5);
   stroke(0, 20);
   rect(width * 0.8, height * 0.8, 200, 100);
+}
+
+// make paper set
+function fnPaper(gfx){
+	let d = 10;
+	let c = 30000;
+	
+	gfx.strokeWeight(0.8);
+	
+	for(let i = 0; i < c; i++){
+
+		// let's do half horiz and half vert. Shouldn't be detectable
+		let isVert = i >= c/2;
+		
+		let	r = random(-d, d);
+		gfx.stroke(1,1);
+		
+		if(isVert){
+			let x = randomGaussian()*width/4 + width/2;
+			let y = randomGaussian()*height/4 + height/4;	
+			gfx.line(x, y, x+r, y+ height/2);
+		}
+		else{
+			let x = randomGaussian()*width/4 + width/4;
+			let y = randomGaussian()*height/4 + height/2;
+			gfx.push();
+			// gfx.rotate(random(-0.91, 0.91));
+			gfx.line(x, y, x+ width/2, y+r);
+			gfx.pop();
+		}
+	}
 }
 
 // background noise function
