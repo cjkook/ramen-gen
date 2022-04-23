@@ -62,13 +62,15 @@ function fnBroth(type, oil, size) {
   ellipse(0, 0, size * 0.75);
 
   // texture
-  for (let i = 0; i < random(4000, 8000); i++) {
-    let w = random(2, 4);
-    let h = random(2, 4);
-    noStroke();
-    fill(random(255), random(20));
-    ellipse(random(-brothSize, brothSize), random(-brothSize, brothSize), w, h);
-  }
+  // for (let i = 0; i < random(4000, 8000); i++) {
+  //   let w = random(2, 4);
+  //   let h = random(2, 4);
+  //   noStroke();
+  //   fill(random(255), random(20));
+  //   ellipse(random(-brothSize, brothSize), random(-brothSize, brothSize), w, h);
+  // }
+
+  
   // oil
   fnOil(oil, size);
 }
