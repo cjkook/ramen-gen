@@ -7,10 +7,15 @@ let paperGfx;
 function setup() {
   createCanvas(windowWidth, windowHeight + 10);
   rectMode(CENTER);
+  imageMode(CENTER);
 }
 
 function draw() {
   let order = makeOrder();
+
+  // move to center
+  translate(width / 2, height / 2);
+
   // call background in a function with canvas blended
   shuffleArray(bgClrs);
   background(bgClrs[0]);
@@ -20,20 +25,22 @@ function draw() {
   image(bg, 0, 0);
 
   // make paper
-  paperGfx = createGraphics(width, height);
+  paperGfx = createGraphics(width*0.6, height * 0.6);
   fnPaper(paperGfx);
-  image(paperGfx,0,0);
-  
+  image(paperGfx, 0, 0);
+
+  // napkin & sticks
+  shuffleArray(napkinClrs);
+  fnNapkin(napkinClrs[0]);
 
   // call bowl setup in a function
   // (size, broth, oil, protein, veg, extras)
   bowl = new RamenBowl(order);
 
-  // move to center
-  translate(width / 2, height / 2);
   bowl.display();
 
   translate(-width / 2, -height / 2);
-  makeMenuPalette();
+  makeMenuPalette(order);
+  
   noLoop();
 }

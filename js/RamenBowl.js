@@ -17,8 +17,8 @@ class RamenBowl {
   // display
   display() {
     // edge
-    stroke(40)
-    strokeWeight(4)
+    stroke(40,80)
+    strokeWeight(10)
     fill(baseClrs[1]);
     ellipse(0, 0, this.pixelSize * 1.05);
 
@@ -42,9 +42,10 @@ class RamenBowl {
           break;
         case "egg":
           fnEgg(this.placement, 0, 45, 2);
+          // if(this.size >= 0.8) fnEgg(this.placement-50, 100, 45, 2)
           break;
         case "onions":
-          fnScallions(this.placement, 0, 20);
+          fnScallions(this.placement, 0, this.pixelSize);
           break;
         case "fishcake":
           fnFishcake(this.placement,0,this.pixelSize);

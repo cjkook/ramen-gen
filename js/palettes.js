@@ -6,6 +6,10 @@
 // 3 ? - SPOON
 let baseClrs = "110603-9d3220-47240F".split("-").map(a => "#" + a)
 
+// - NAPKIN 
+// https://coolors.co/283d3b-197278-edddd4-c44536-772e25
+let napkinClrs = "283d3b-197278-edddd4-c44536-772e25".split("-").map(a => "#" + a)
+
 // - BROTH
 // https://coolors.co/fee379-2c2a23
 // 0 FEE379 - CHX STOCK

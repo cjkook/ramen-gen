@@ -2,8 +2,8 @@
 function makeOrder() {
   let order = {};
   // size
-  order.size = random(0.6, 0.9);
-  let sizeText = "";
+  order.size = random(0.6, 1);
+  let sizeText;
   if (order.size <= 0.65) {
     sizeText = "small";
   } else if (order.size >= 0.8) {
@@ -29,7 +29,7 @@ function makeOrder() {
     "bok choy",
     "egg",
     "fishcake",
-    "chili"
+    "chili",
   ];
   shuffleArray(veggies);
   veggies = prepend("onions", veggies);
@@ -45,7 +45,6 @@ function makeOrder() {
   order.sections = prepend(order.extras, order.sections);
 
   // ? for testing
-  
 
   // return order
   return order;
@@ -70,13 +69,12 @@ function fnBroth(type, oil, size) {
   for (let i = 0; i < random(1000, 2000); i++) {
     const w = random(2, 4);
     const h = random(2, 4);
-    const x = random(-brothSize, brothSize)
-    const y = random(-brothSize, brothSize)
-    if(dist(x,y,0,0)<brothSize){
-      fill(random(255),random(50),random(20), random(40));
-    ellipse(x, y, w, h);
+    const x = random(-brothSize, brothSize);
+    const y = random(-brothSize, brothSize);
+    if (dist(x, y, 0, 0) < brothSize) {
+      fill(random(255), random(50), random(20), random(40));
+      ellipse(x, y, w, h);
     }
-    
   }
 
   // oil
@@ -136,14 +134,14 @@ function fnOil(type, size) {
 function fnMushrooms(locX, locY, size, sections) {
   let density = random(1, 4);
   for (let i = 0; i <= density; i++) {
-    let zoff = random(3);
+    let zoff = random(4);
     // outside shape
     strokeWeight(4);
-    stroke(ramenClrs[5]);
+    stroke(ramenClrs[5] + "60");
     fill(ramenClrs[4]);
     push();
     beginShape();
-    translate(locX - i * 10, locY + i * 40);
+    translate(locX - i * 15, locY + i * 40);
     for (let a = 0; a < TWO_PI; a += 0.2) {
       let xoff = map(cos(a), -2, 1, 0, 2);
       let yoff = map(sin(a), -1, 1, 0, 2);
@@ -159,7 +157,7 @@ function fnMushrooms(locX, locY, size, sections) {
     strokeWeight(1);
     push();
     beginShape();
-    translate(locX - i * 10, locY + i * 40);
+    translate(locX - i * 15, locY + i * 40);
     for (let a = 0; a < TWO_PI; a += 0.1) {
       let xoff = map(cos(a), -2, 1, 0, 2);
       let yoff = map(sin(a), -1, 1, 0, 2);
@@ -175,7 +173,7 @@ function fnMushrooms(locX, locY, size, sections) {
     push();
     fill(ramenClrs[5]);
     beginShape();
-    translate(locX - i * 10, locY + i * 40);
+    translate(locX - i * 14, locY + i * 40);
     for (let a = 0; a < TWO_PI; a += 0.2) {
       zoff += 0.01;
       let xoff = map(cos(a), -2, 1, 0, 2);
@@ -191,11 +189,15 @@ function fnMushrooms(locX, locY, size, sections) {
 }
 
 // make scallions
+// size dictates density
 function fnScallions(x, y, size) {
+  console.log(size);
+  let density = map(size, 400, 1000, 150, 400);
+  let spread = map(density, 150, 400, 30, 70);
   fill(ramenClrs[3]);
   for (let i = 0; i <= 200; i++) {
-    let locx = random(-40, 40);
-    let locy = random(-40, 40);
+    let locx = random(-spread, spread);
+    let locy = random(-spread, spread);
 
     push();
     translate(x + x, y);
@@ -241,7 +243,7 @@ function fnFishcake(x, y, size) {
     fill(ramenClrs[6] + "EE");
     ellipse(place, y + n * 30, size / 8);
 
-    for (let i = 0; i <= 100 + random(40,120); i++) {
+    for (let i = 0; i <= 100 + random(40, 120); i++) {
       let locx = place + cos(angle) * scalar;
       let locy = y + sin(angle) * scalar;
       angle += speed;
@@ -257,47 +259,82 @@ function fnFishcake(x, y, size) {
 }
 
 // chili thread
-function fnChiliThread(x,y,size) {
-
-}
+function fnChiliThread(x, y, size) {}
 
 // menu desc & palette
-function makeMenuPalette() {
+function makeMenuPalette(order) {
   fill("#F4F1DE" + "B0");
   strokeWeight(5);
   stroke(0, 20);
-  rect(width * 0.8, height * 0.8, 200, 100);
+  rect(width * 0.5, height * 0.1, 200, 100);
+
+  text(order);
 }
 
 // make paper set
-function fnPaper(gfx){
-	let d = 10;
-	let c = 30000;
-	
-	gfx.strokeWeight(0.8);
-	
-	for(let i = 0; i < c; i++){
+function fnPaper(gfx) {
+  let d = 1;
+  let c = 20000;
 
-		// let's do half horiz and half vert. Shouldn't be detectable
-		let isVert = i >= c/2;
-		
-		let	r = random(-d, d);
-		gfx.stroke(1,1);
-		
-		if(isVert){
-			let x = randomGaussian()*width/4 + width/2;
-			let y = randomGaussian()*height/4 + height/4;	
-			gfx.line(x, y, x+r, y+ height/2);
-		}
-		else{
-			let x = randomGaussian()*width/4 + width/4;
-			let y = randomGaussian()*height/4 + height/2;
-			gfx.push();
-			// gfx.rotate(random(-0.91, 0.91));
-			gfx.line(x, y, x+ width/2, y+r);
-			gfx.pop();
-		}
-	}
+  gfx.strokeWeight(0.8);
+
+  gfx.fill(bgClrs[1] + "70");
+  gfx.noStroke();
+  gfx.rect(0, 0, width * 0.6, height * 0.6, 20);
+
+  for (let i = 0; i < c; i++) {
+    // let's do half horiz and half vert. Shouldn't be detectable
+    let isVert = i >= c / 10;
+
+    let r = random(-d, d);
+    gfx.stroke(1, random(10));
+
+    if (isVert) {
+      let x = (randomGaussian() * width) / 4 + width / 2;
+      let y = (randomGaussian() * height) / 4 + height / 4;
+      if (dist(x, y, width / 2, height / 2) < 800) {
+        gfx.line(x, y, x + r, y + height / 2);
+      }
+    } else {
+      let x = (randomGaussian() * width) / 4 + width / 4;
+      let y = (randomGaussian() * height) / 4 + height / 2;
+      if (dist(x, y, 0, 0) < 800) {
+        gfx.push();
+        // gfx.rotate(random(-0.91, 0.91));
+        gfx.line(x, y, x + width / 2, y + r);
+        gfx.pop();
+      }
+    }
+  }
+}
+
+// napkin & sticks
+function fnNapkin(color) {
+  const x = width * 0.22;
+  const y = 0;
+  const w = width * 0.1;
+  const h = height * 0.4;
+  const gridSizeX = Math.ceil(w / (random(3, 10)));
+  const gridSizeY = Math.ceil(h / (random(3, 20)));
+
+  stroke(napkinClrs[1] + "20");
+  strokeWeight(2);
+  fill(color);
+  rect(x, y, w, h, 20, 0, 20, 0);
+
+  // pattern
+  // noStroke();
+  fill(napkinClrs[1] + "10");
+  for (let i = gridSizeX; i < w - gridSizeX; i += gridSizeX) {
+    for (let j = gridSizeY; j < h - gridSizeY; j += gridSizeY) {
+      if (j % 2 == 0) {
+        ellipse(x - w / 2 + i, y - h / 2 + j, gridSizeX, gridSizeY);
+      } else {
+        rect(x - w / 2 + i, y - h / 2 + j, gridSizeX/2, gridSizeY/2)
+      }
+      
+    }
+  }
 }
 
 // background noise function
