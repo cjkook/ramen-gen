@@ -32,7 +32,7 @@ function draw() {
   // napkin & sticks
   shuffleArray(napkinClrs);
   fnNapkin(napkinClrs[0]);
-
+  fnChopsticks(0,0,random(400,500))
   // call bowl setup in a function
   // (size, broth, oil, protein, veg, extras)
   bowl = new RamenBowl(order);

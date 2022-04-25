@@ -268,7 +268,59 @@ function makeMenuPalette(order) {
   stroke(0, 20);
   rect(width * 0.5, height * 0.1, 200, 100);
 
-  text(order);
+  // text(order);
+}
+
+function fnChopsticks(x, y, size) {
+  noStroke();
+  strokeWeight(0.5)
+  fill(baseClrs[2]);
+  for (let i = 0; i <= size; i += 2) {
+    let point = i / 30;
+    point < 6 ? (point = 6) : null;
+    (i > 350) && (i < 400) ? stroke(baseClrs[0]) : noStroke();
+    ellipse(x + width * 0.2, y + i - height * 0.22, point);
+    ellipse(x + width * 0.2 + width * 0.02, y + i - height * 0.22, point);
+  }
+}
+
+function fnBowlTexture(size, gfx) {
+  const seed = random();
+
+  // hatch lines
+  if (seed < 0.9) {
+    let d = 1;
+    let c = 3000;
+    gfx.strokeWeight(0.8);
+
+    for (let i = 0; i < c; i++) {
+      // let's do half horiz and half vert. Shouldn't be detectable
+      let isVert = i >= c / 10;
+
+      let r = random(-d, d);
+      gfx.stroke(240, random(50));
+
+      if (isVert) {
+        let x = randomGaussian() * size;
+        let y = randomGaussian() * size;
+        if (dist(gfx.width / 2, gfx.height / 2, x, y) < size) {
+          // gfx.rotate(random(-0.91, 0.91));
+          gfx.line(x, y, x + r, y + size / 3);
+        }
+      } else {
+        let x = (randomGaussian() * width) / 4 + width / 4;
+        let y = (randomGaussian() * height) / 4 + height / 2;
+        if (dist(0, 0, x, y) < size) {
+          gfx.push();
+          // gfx.rotate(random(-0.91, 0.91));
+          // gfx.line(x, y, x + width / 2, y + r);
+          gfx.pop();
+        }
+      }
+    }
+  }
+
+  image(gfx, 0, 0);
 }
 
 // make paper set
@@ -284,7 +336,7 @@ function fnPaper(gfx) {
 
   for (let i = 0; i < c; i++) {
     // let's do half horiz and half vert. Shouldn't be detectable
-    let isVert = i >= c / 10;
+    let isVert = i >= c / 2;
 
     let r = random(-d, d);
     gfx.stroke(1, random(10));
@@ -308,14 +360,14 @@ function fnPaper(gfx) {
   }
 }
 
-// napkin & sticks
+// napkin
 function fnNapkin(color) {
   const x = width * 0.22;
   const y = 0;
   const w = width * 0.1;
   const h = height * 0.4;
-  const gridSizeX = Math.ceil(w / (random(3, 10)));
-  const gridSizeY = Math.ceil(h / (random(3, 20)));
+  const gridSizeX = Math.ceil(w / random(3, 10));
+  const gridSizeY = Math.ceil(h / random(3, 20));
 
   stroke(napkinClrs[1] + "20");
   strokeWeight(2);
@@ -323,16 +375,15 @@ function fnNapkin(color) {
   rect(x, y, w, h, 20, 0, 20, 0);
 
   // pattern
-  // noStroke();
+  noStroke();
   fill(napkinClrs[1] + "10");
   for (let i = gridSizeX; i < w - gridSizeX; i += gridSizeX) {
     for (let j = gridSizeY; j < h - gridSizeY; j += gridSizeY) {
       if (j % 2 == 0) {
         ellipse(x - w / 2 + i, y - h / 2 + j, gridSizeX, gridSizeY);
       } else {
-        rect(x - w / 2 + i, y - h / 2 + j, gridSizeX/2, gridSizeY/2)
+        rect(x - w / 2 + i, y - h / 2 + j, gridSizeX / 2, gridSizeY / 2);
       }
-      
     }
   }
 }

@@ -17,8 +17,8 @@ class RamenBowl {
   // display
   display() {
     // edge
-    stroke(40,80)
-    strokeWeight(10)
+    stroke(40, 80);
+    strokeWeight(10);
     fill(baseClrs[1]);
     ellipse(0, 0, this.pixelSize * 1.05);
 
@@ -26,6 +26,10 @@ class RamenBowl {
     noStroke();
     fill(baseClrs[0]);
     ellipse(0, 0, this.pixelSize);
+
+    // bowl texture
+    let gfx = createGraphics(this.pixelSize, this.pixelSize);
+    fnBowlTexture(this.pixelSize, gfx);
 
     // broth
     fnBroth(this.broth, this.oil, this.pixelSize);
@@ -48,10 +52,10 @@ class RamenBowl {
           fnScallions(this.placement, 0, this.pixelSize);
           break;
         case "fishcake":
-          fnFishcake(this.placement,0,this.pixelSize);
+          fnFishcake(this.placement, 0, this.pixelSize);
           break;
         case "chili":
-          fnChiliThread(this.placement,0,this.pixelSize);
+          fnChiliThread(this.placement, 0, this.pixelSize);
           break;
       }
 
