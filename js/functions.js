@@ -227,8 +227,16 @@ function fnEgg(ax, ay, s = 100, opt = 2) {
     points.push(createVector(x, y));
   }
   endShape(CLOSE);
-  fill(ramenClrs[0]);
+  fill(ramenClrs[0] + "60");
+  ellipse(ax + ax * 0.9, ay + 10, 70);
+  fill(ramenClrs[0] + "50");
   ellipse(ax + ax * 0.9, ay + 10, 60);
+  fill(ramenClrs[0] + "40");
+  ellipse(ax + ax * 0.9, ay + 10, 50);
+  fill(ramenClrs[0] + "30");
+  ellipse(ax + ax * 0.9, ay + 10, 40);
+  fill(ramenClrs[0] + "20");
+  ellipse(ax + ax * 0.9, ay + 10, 30);
 }
 
 // make fishcake
@@ -273,15 +281,57 @@ function makeMenuPalette(order) {
 
 function fnChopsticks(x, y, size) {
   noStroke();
-  strokeWeight(0.5)
+  strokeWeight(0.5);
   fill(baseClrs[2]);
   for (let i = 0; i <= size; i += 2) {
     let point = i / 30;
     point < 6 ? (point = 6) : null;
-    (i > 350) && (i < 400) ? stroke(baseClrs[0]) : noStroke();
+    i > 350 && i < 400 ? stroke(baseClrs[0]) : noStroke();
     ellipse(x + width * 0.2, y + i - height * 0.22, point);
     ellipse(x + width * 0.2 + width * 0.02, y + i - height * 0.22, point);
   }
+}
+
+function fnSpoon(x, y, size) {
+  let adjSize = size * 0.2;
+  let adjX = x - width * 0.23;
+  let adjY = y - height * 0.12;
+
+  stroke(baseClrs[0] + "50");
+  strokeWeight(5);
+  fill(baseClrs[1]);
+
+  // stem
+  quad(
+    adjX - adjSize * 0.38,
+    adjY,
+    adjX + adjSize * 0.38,
+    adjY,
+    adjX + adjSize * 0.1,
+    adjY + adjSize * 2.15,
+    adjX - adjSize * 0.1,
+    adjY + adjSize * 2.15
+  );
+
+  ellipse(adjX, adjY, adjSize * 0.8, adjSize);
+
+  stroke(baseClrs[1] + "50");
+  noStroke();
+  fill(baseClrs[0]);
+  // stem
+  quad(
+    adjX - adjSize * 0.26,
+    adjY,
+    adjX + adjSize * 0.26,
+    adjY,
+    adjX + adjSize * 0.08,
+    adjY + adjSize * 2.1,
+    adjX - adjSize * 0.08,
+    adjY + adjSize * 2.1
+  );
+
+  ellipse(adjX, adjY, adjSize * 0.7, adjSize*.86);
+  // speckles
 }
 
 function fnBowlTexture(size, gfx) {

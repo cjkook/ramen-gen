@@ -12,6 +12,9 @@ function setup() {
 
 function draw() {
   let order = makeOrder();
+  // call bowl setup in a function
+  // (size, broth, oil, protein, veg, extras)
+  bowl = new RamenBowl(order);
 
   // move to center
   translate(width / 2, height / 2);
@@ -29,13 +32,12 @@ function draw() {
   fnPaper(paperGfx);
   image(paperGfx, 0, 0);
 
-  // napkin & sticks
+  // napkin, spoon, & sticks
   shuffleArray(napkinClrs);
   fnNapkin(napkinClrs[0]);
   fnChopsticks(0,0,random(400,500))
-  // call bowl setup in a function
-  // (size, broth, oil, protein, veg, extras)
-  bowl = new RamenBowl(order);
+  fnSpoon(0,0,bowl.pixelSize)
+  
 
   bowl.display();
 
